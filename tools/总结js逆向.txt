@@ -1,0 +1,135 @@
+var _aaa;
+!function (t) {
+    var e = {};
+    function r(n) {
+        if (e[n])
+            return e[n].exports;
+        var i = e[n] = {
+            i: n,
+            l: !1,
+            exports: {}
+        };
+        console.log("'" + n.toString() + "'" + ":" + (t[n] + "") + ",")
+        return t[n].call(i.exports, i, i.exports, r),
+        i.l = !0,
+        i.exports
+    }
+    _aaa = r
+}
+({})
+
+console.log("'" + n.toString() + "'" + ":" + (t[n] + "") + ",")打印个个模块
+
+1.eval()
+JavaScript eval()函数
+eval() 函数计算 JavaScript 字符串，并把它作为脚本代码来执行。
+如果参数是一个表达式，eval() 函数将执行表达式。如果参数是Javascript语句，eval()将执行 Javascript 语句。
+eval("x=10;y=20;document.write(x*y)");200
+document.write("<br>" + eval("2+2"));4
+document.write("<br>" + eval(x+17));27
+
+2.atob() 
+atob() 方法用于解码使用 base-64 编码的字符串。
+base-64 编码使用方法是 btoa()
+window.atob(encodedStr)
+var str = "RUNOOB";
+var enc = window.btoa(str);
+var dec = window.atob(enc);
+var res = "编码字符串为: " + enc + "<br>" + "解码后字符串为: " + dec;
+案例 猿人学 第一题 js 混淆 - 源码乱码
+eval(atob(window['b'])[J('0x0', ']dQW')](J('0x1', 'GTu!'), '\x27' + mw + '\x27'));
+atob(window['b'])
+
+3.btoa()
+btoa()方法用于创建一个 base-64 编码的字符串。
+该方法使用 "A-Z", "a-z", "0-9", "+", "/" 和 "=" 字符来编码字符串。
+base-64 解码使用方法是 atob() 。
+案例 猿人学 12题入门级js 
+btoa('yuanrenxue' + window.page)
+
+
+总结 当出现不能跟到栈的位置 可以先进源代码下断
+案例 阿儿法营 https://aerfaying.com/ 注册 https://aerfaying.com/WebApi/Users/Register  s的值
+多注意前面的定义参数 对于参数的定义 然后 扣代码时也要看看前后代码要扣全
+当要看某一个webpack产生的值，下断点，然后刷新页面。
+
+当找到加密地点时，当看到webpack时要找n时向上找关于n的找到n = a.n(c)再找C开始找加载器通过a在控制台上打印出来
+案例 https://u.caixin.com/web/login 
+var A = a("53ca")
+      , c = (a("ac1f"),
+            a("00b4"),
+            a("5319"),
+            a("4d63"),
+            a("c607"),
+            a("2c3e"),
+            a("25f0"),
+            a("d3b7"),
+            a("4d90"),
+            a("3ca3"),
+            a("ddb0"),
+            a("9861"),
+            a("fb6a"),
+            a("841c"),
+            a("b64b"),
+            a("99af"),
+            a("d9e2"),
+            a("3452"))
+              , n = a.n(c)
+              , r = a("a78e")
+              , s = a.n(r)
+              , o = {
+                path: "/",
+                expires: 365,
+                domain: "caixin.com"
+            }
+             "此处省略很多代码"
+              , p = function(t) {
+                var e = n.a.enc.Utf8.parse("G3JH98Y8MY9GWKWG")
+                  , a = n.a.enc.Utf8.parse(t)
+                  , A = n.a.AES.encrypt(a, e, {
+                    mode: n.a.mode.ECB,
+                    padding: n.a.pad.Pkcs7
+                });
+                return encodeURIComponent(A.toString())
+            }
+加载器建议补全
+
+!function(e) {
+function a(r) {
+        if (n[r])
+            return n[r].exports;
+        var t = n[r] = {
+            i: r,
+            l: !1,
+            exports: {}
+        };
+        return e[r].call(t.exports, t, t.exports, a),
+        t.l = !0,
+        t.exports
+    }
+}([]);
+
+找到加载模块就行了
+总结 一定要找到初始化的地方
+
+
+案例 酷我音乐  reqId 
+通过搜索的方式找到加密的地方  http://www.kuwo.cn/
+搜索到进行下断
+
+var r = n(12)
+      , o = n.n(r)
+      , l = n(109)
+      , c = n.n(l)
+      , h = n(6)
+      , d = function(t, e, n) {
+        ‘省略代码’
+        var n = c()();
+        return t.data || (t.data = {}),
+        "get" === t.method ? (t.data.httpsStatus = 1,
+        t.data.reqId = n,
+发现 var n = c()();就是要找的参数 找c 相关的 c = n.n(l) 再找 l 相关的 l = n(109)
+在控制台n(109)输出
+点进相关代码 发现 l = n(202), c = n(203) 有引用 把这两个也扣下来
+n.n(l)加载器相关的也补起来 
+补完能运行己算成功
