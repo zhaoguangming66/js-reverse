@@ -133,3 +133,11 @@ var r = n(12)
 点进相关代码 发现 l = n(202), c = n(203) 有引用 把这两个也扣下来
 n.n(l)加载器相关的也补起来 
 补完能运行己算成功
+案例
+某投资领域 SAAS 系统 PEDATA MAX 资讯，返回结果加密
+主页：aHR0cHM6Ly9tYXgucGVkYXRhLmNuL2NsaWVudC9uZXdzL25ld3NmbGFzaA==
+接口：aHR0cHM6Ly9tYXgucGVkYXRhLmNuL2FwaS9xNHgvbmV3c2ZsYXNoL2xpc3Q=
+逆向参数：请求返回的加密结果，data: "L+o+YmIyNDE..."
+一定要仔细观察生成参数，还有加密期间的参数进行解密
+这个看返回的参数解密 exor 进行定位加密地方进行解密
+然后看方法补相关的 看看关键词 进行相对于的补法
